@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neón Norte — Tu marca, encendida</title>
+<meta name="description" content="Neón Norte: diseño web futurista para marcas que quieren brillar de noche y de día.">
+<style>
+  :root{
+    --bg:#07040f; --bg2:#0f0820; --cyan:#19f3ff; --mag:#ff2bd6; --lime:#b6ff3c; --violet:#7a4dff;
+    --text:#e9e4ff; --muted:#9d94c4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+  svg{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1120px,92%);margin-inline:auto}
+  .mono{font-family:ui-monospace,"Cascadia Code","Courier New",monospace}
+  h1,h2,h3{line-height:1.05;font-weight:900;letter-spacing:-.02em;text-transform:uppercase}
+  h2{font-size:clamp(1.9rem,4.5vw,3.2rem)}
+  .glow-c{color:var(--cyan);text-shadow:0 0 12px var(--cyan),0 0 34px rgba(25,243,255,.55)}
+  .glow-m{color:var(--mag);text-shadow:0 0 12px var(--mag),0 0 34px rgba(255,43,214,.55)}
+  .tag{font-family:ui-monospace,"Courier New",monospace;color:var(--lime);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem;display:block}
+  .tag::before{content:"> "}
+  .btn{display:inline-block;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:.9rem 1.7rem;border:2px solid var(--cyan);color:var(--cyan);background:transparent;cursor:pointer;font-size:.95rem;border-radius:4px;box-shadow:0 0 14px rgba(25,243,255,.45),inset 0 0 14px rgba(25,243,255,.2);transition:all .2s}
+  .btn:hover{background:var(--cyan);color:var(--bg);box-shadow:0 0 30px var(--cyan)}
+  .btn.m{border-color:var(--mag);color:var(--mag);box-shadow:0 0 14px rgba(255,43,214,.45),inset 0 0 14px rgba(255,43,214,.2)}
+  .btn.m:hover{background:var(--mag);color:#fff;box-shadow:0 0 30px var(--mag)}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(7,4,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(25,243,255,.35)}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0}
+  .logo{display:flex;align-items:center;gap:.6rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+  .logo svg{width:34px;height:34px}
+  nav ul{display:flex;gap:1.8rem;list-style:none;align-items:center;font-size:.9rem;text-transform:uppercase;letter-spacing:.1em}
+  nav a:not(.btn):hover{color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
+  .menu-btn{display:none;background:none;border:2px solid var(--cyan);color:var(--cyan);border-radius:4px;padding:.4rem .8rem;font-size:1.1rem;cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;padding:5rem 0 4rem;overflow:hidden;background:radial-gradient(ellipse at 70% 30%,rgba(122,77,255,.35),transparent 60%),var(--bg)}
+  .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.2rem);margin-bottom:1.2rem}
+  .hero p{color:var(--muted);font-size:1.15rem;max-width:32rem;margin-bottom:2rem}
+  .hero .actions{display:flex;gap:1.1rem;flex-wrap:wrap}
+  .hero-art svg{width:100%;height:auto;animation:pulse 5s ease-in-out infinite}
+  @keyframes pulse{50%{filter:brightness(1.25) drop-shadow(0 0 18px rgba(255,43,214,.6))}}
+  .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px);pointer-events:none}
+
+  /* TICKER */
+  .ticker{border-block:1px solid var(--mag);background:var(--bg2);overflow:hidden;white-space:nowrap;padding:.8rem 0;color:var(--mag);font-family:ui-monospace,"Courier New",monospace;letter-spacing:.3em;text-shadow:0 0 10px var(--mag)}
+  .ticker div{display:inline-block;animation:tick 26s linear infinite}
+  @keyframes tick{to{transform:translateX(-50%)}}
+
+  section{padding:5.5rem 0}
+  .head{max-width:40rem;margin-bottom:3rem}
+  .head p{color:var(--muted);margin-top:1rem;font-size:1.05rem}
+
+  /* SERVICIOS */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+  .card{position:relative;padding:2rem;background:linear-gradient(160deg,rgba(122,77,255,.14),rgba(255,255,255,.02));border:1px solid rgba(25,243,255,.4);border-radius:10px;transition:all .25s}
+  .card:hover{transform:translateY(-6px);border-color:var(--mag);box-shadow:0 0 28px rgba(255,43,214,.4)}
+  .card .num{font-family:ui-monospace,"Courier New",monospace;color:var(--lime);font-size:.85rem;letter-spacing:.2em}
+  .card svg{width:46px;height:46px;margin:1rem 0;stroke:var(--cyan);filter:drop-shadow(0 0 6px var(--cyan))}
+  .card h3{font-size:1.25rem;margin-bottom:.5rem}
+  .card p{color:var(--muted)}
+
+  /* GALERIA */
+  .alt{background:var(--bg2);border-block:1px solid rgba(122,77,255,.4)}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .tile{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:1px solid var(--cyan);box-shadow:0 0 18px rgba(25,243,255,.25);transition:all .3s}
+  .tile:hover{border-color:var(--mag);box-shadow:0 0 34px rgba(255,43,214,.55);transform:scale(1.02)}
+  .tile svg{width:100%;height:100%}
+  .tile span{position:absolute;left:10px;bottom:10px;font-family:ui-monospace,"Courier New",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(7,4,15,.85);color:var(--lime);padding:.3rem .7rem;border-radius:3px;border:1px solid var(--lime)}
+  .tile.wide{grid-column:span 2;aspect-ratio:auto}
+
+  /* PROCESO */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+  .step{padding:1.6rem;border-left:3px solid var(--cyan);background:rgba(255,255,255,.03);border-radius:0 10px 10px 0}
+  .step:nth-child(2){border-color:var(--mag)} .step:nth-child(3){border-color:var(--lime)} .step:nth-child(4){border-color:var(--violet)}
+  .step b{font-family:ui-monospace,"Courier New",monospace;color:var(--cyan);font-size:.85rem;letter-spacing:.2em}
+  .step h3{font-size:1.2rem;margin:.3rem 0 .4rem}
+  .step p{color:var(--muted)}
+
+  /* PLANES */
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;align-items:stretch}
+  .plan{padding:2rem;border:1px solid var(--violet);border-radius:12px;background:rgba(122,77,255,.07);display:flex;flex-direction:column}
+  .plan.pop{border:2px solid var(--mag);box-shadow:0 0 36px rgba(255,43,214,.45),inset 0 0 30px rgba(255,43,214,.12)}
+  .plan .badge{align-self:flex-start;font-family:ui-monospace,"Courier New",monospace;font-size:.72rem;letter-spacing:.16em;background:var(--mag);color:#fff;padding:.25rem .7rem;border-radius:3px;margin-bottom:.8rem}
+  .plan h3{font-size:1.4rem}
+  .price{font-size:2.8rem;font-weight:900;margin:.6rem 0;color:var(--cyan);text-shadow:0 0 14px rgba(25,243,255,.6)}
+  .price small{font-size:.9rem;color:var(--muted);text-shadow:none;font-weight:600}
+  .plan ul{list-style:none;margin:1rem 0 1.8rem;flex:1}
+  .plan li{padding:.3rem 0 .3rem 1.6rem;position:relative;color:var(--muted)}
+  .plan li::before{content:"▸";position:absolute;left:0;color:var(--lime)}
+
+  /* CONTACTO */
+  .cta{background:radial-gradient(ellipse at 20% 80%,rgba(255,43,214,.25),transparent 55%),var(--bg)}
+  .cta .grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  form{display:grid;gap:1rem;padding:2rem;border:1px solid var(--cyan);border-radius:12px;background:rgba(15,8,32,.8);box-shadow:0 0 30px rgba(25,243,255,.25)}
+  label{font-family:ui-monospace,"Courier New",monospace;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+  input,textarea{width:100%;padding:.8rem 1rem;background:var(--bg);border:1px solid var(--violet);border-radius:6px;color:var(--text);font:inherit;margin-top:.3rem}
+  input:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 12px rgba(25,243,255,.5)}
+  textarea{min-height:110px;resize:vertical}
+  .ok{display:none;color:var(--lime);font-family:ui-monospace,"Courier New",monospace;font-size:.9rem}
+
+  footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid rgba(25,243,255,.3);font-family:ui-monospace,"Courier New",monospace;font-size:.85rem;letter-spacing:.1em}
+
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+  .rv.in{opacity:1;transform:none}
+
+  @media (max-width:860px){
+    .hero .grid,.cta .grid{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr 1fr} .tile.wide{grid-column:span 2}
+    .menu-btn{display:block}
+    nav ul{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg2);flex-direction:column;padding:1.5rem;border-bottom:1px solid var(--cyan)}
+    nav ul.open{display:flex}
+  }
+  @media (max-width:520px){.gallery{grid-template-columns:1fr}.tile.wide{grid-column:auto;aspect-ratio:4/3}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" class="logo" aria-label="Neón Norte, inicio">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <polygon points="20,3 37,34 3,34" fill="none" stroke="#19f3ff" stroke-width="3" stroke-linejoin="round" style="filter:drop-shadow(0 0 5px #19f3ff)"/>
+        <polygon points="20,15 28,30 12,30" fill="#ff2bd6" style="filter:drop-shadow(0 0 5px #ff2bd6)"/>
+      </svg>
+      <span class="glow-c">Neón</span><span class="glow-m">Norte</span>
+    </a>
+    <nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+      <ul id="menu">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#contacto" class="btn m" style="padding:.5rem 1.2rem">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="hero">
+    <div class="scan"></div>
+    <div class="wrap grid" style="position:relative">
+      <div>
+        <span class="tag">Diseño web futurista</span>
+        <h1>Tu marca,<br><span class="glow-c">encendida</span> <span class="glow-m">24/7</span></h1>
+        <p>Páginas con carácter, velocidad y un look que no se olvida. Para negocios que quieren destacar entre la multitud.</p>
+        <div class="actions">
+          <a href="#contacto" class="btn">Iniciar proyecto</a>
+          <a href="#trabajos" class="btn m">Ver estilos</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 520 420" role="img" aria-label="Sol de neón sobre una cuadrícula en perspectiva">
+          <defs>
+            <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe14d"/><stop offset=".5" stop-color="#ff2bd6"/><stop offset="1" stop-color="#7a4dff"/></linearGradient>
+            <clipPath id="clipSun"><circle cx="260" cy="190" r="130"/></clipPath>
+          </defs>
+          <g clip-path="url(#clipSun)">
+            <rect x="120" y="50" width="280" height="280" fill="url(#sun)"/>
+            <g fill="#07040f"><rect x="120" y="215" width="280" height="6"/><rect x="120" y="240" width="280" height="9"/><rect x="120" y="266" width="280" height="12"/><rect x="120" y="294" width="280" height="16"/></g>
+          </g>
+          <rect x="0" y="260" width="520" height="160" fill="#07040f"/>
+          <g stroke="#19f3ff" stroke-width="2" fill="none" style="filter:drop-shadow(0 0 4px #19f3ff)">
+            <line x1="0" y1="260" x2="520" y2="260"/>
+            <line x1="0" y1="285" x2="520" y2="285"/><line x1="0" y1="315" x2="520" y2="315"/>
+            <line x1="0" y1="352" x2="520" y2="352"/><line x1="0" y1="400" x2="520" y2="400"/>
+            <line x1="260" y1="260" x2="260" y2="420"/><line x1="260" y1="260" x2="140" y2="420"/><line x1="260" y1="260" x2="20" y2="420"/>
+            <line x1="260" y1="260" x2="-110" y2="420"/><line x1="260" y1="260" x2="380" y2="420"/><line x1="260" y1="260" x2="500" y2="420"/>
+            <line x1="260" y1="260" x2="630" y2="420"/>
+          </g>
+          <g fill="#b6ff3c" style="filter:drop-shadow(0 0 5px #b6ff3c)"><circle cx="70" cy="70" r="3"/><circle cx="450" cy="50" r="2.5"/><circle cx="480" cy="150" r="3"/><circle cx="40" cy="170" r="2"/><circle cx="400" cy="100" r="2"/></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div>// WEB // MARCA // VELOCIDAD // DISEÑO // NEÓN // WEB // MARCA // VELOCIDAD // DISEÑO // NEÓN // WEB // MARCA // VELOCIDAD // DISEÑO // NEÓN // WEB // MARCA // VELOCIDAD // DISEÑO // NEÓN //</div>
+  </div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Servicios</span>
+        <h2>Todo para que <span class="glow-c">brilles</span></h2>
+        <p>Cuatro módulos, una sola misión: que tu marca se vea y funcione de primera.</p>
+      </div>
+      <div class="cards">
+        <article class="card rv"><span class="num">01</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <h3>Sitios web</h3><p>Diseño a medida con identidad fuerte y estructura clara.</p></article>
+        <article class="card rv"><span class="num">02</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
+          <h3>Velocidad</h3><p>Páginas livianas que cargan al instante en cualquier dispositivo.</p></article>
+        <article class="card rv"><span class="num">03</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18M3 12h18"/></svg>
+          <h3>Presencia online</h3><p>Redes, mapa y contacto conectados para que te encuentren fácil.</p></article>
+        <article class="card rv"><span class="num">04</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.8 5.5 21l2-7.5L2 9h7z"/></svg>
+          <h3>Identidad visual</h3><p>Colores, formas y estilo coherentes en toda tu marca.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajos" class="alt">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Galería</span>
+        <h2>Mundos <span class="glow-m">visuales</span></h2>
+        <p>Atmósferas distintas para cada tipo de negocio.</p>
+      </div>
+      <div class="gallery">
+        <div class="tile wide rv">
+          <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="600" height="300" fill="#0f0820"/>
+            <g fill="none" stroke-width="3">
+              <path d="M0 230L80 160 150 200 240 90 330 170 420 60 510 140 600 100" stroke="#19f3ff" style="filter:drop-shadow(0 0 6px #19f3ff)"/>
+              <path d="M0 260L90 220 170 250 260 160 350 230 440 130 530 210 600 180" stroke="#ff2bd6" style="filter:drop-shadow(0 0 6px #ff2bd6)"/>
+            </g>
+            <g fill="#b6ff3c"><circle cx="240" cy="90" r="6"/><circle cx="420" cy="60" r="6"/><circle cx="440" cy="130" r="6"/></g>
+          </svg><span>Tecnología</span>
+        </div>
+        <div class="tile rv">
+          <svg viewBox="0 0 300 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="300" height="225" fill="#0f0820"/>
+            <circle cx="150" cy="112" r="70" fill="none" stroke="#ff2bd6" stroke-width="6" style="filter:drop-shadow(0 0 8px #ff2bd6)"/>
+            <circle cx="150" cy="112" r="40" fill="none" stroke="#19f3ff" stroke-width="6" style="filter:drop-shadow(0 0 8px #19f3ff)"/>
+            <circle cx="150" cy="112" r="10" fill="#b6ff3c"/>
+          </svg><span>Música & eventos</span>
+        </div>
+        <div class="tile rv">
+          <svg viewBox="0 0 300 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="300" height="225" fill="#0f0820"/>
+            <g stroke="#7a4dff" stroke-width="2" fill="none"><path d="M0 40h300M0 90h300M0 140h300M0 190h300"/><path d="M50 0v225M110 0v225M170 0v225M230 0v225"/></g>
+            <rect x="90" y="65" width="120" height="95" rx="8" fill="#07040f" stroke="#19f3ff" stroke-width="3" style="filter:drop-shadow(0 0 8px #19f3ff)"/>
+            <path d="M110 135l25-30 20 20 15-15 20 25z" fill="#ff2bd6"/>
+          </svg><span>Fotografía</span>
+        </div>
+        <div class="tile rv">
+          <svg viewBox="0 0 300 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="300" height="225" fill="#0f0820"/>
+            <g style="filter:drop-shadow(0 0 7px #b6ff3c)"><rect x="60" y="120" width="30" height="70" fill="#b6ff3c"/><rect x="110" y="85" width="30" height="105" fill="#19f3ff"/><rect x="160" y="55" width="30" height="135" fill="#ff2bd6"/><rect x="210" y="100" width="30" height="90" fill="#7a4dff"/></g>
+            <line x1="40" y1="190" x2="260" y2="190" stroke="#e9e4ff" stroke-width="2"/>
+          </svg><span>Finanzas & datos</span>
+        </div>
+        <div class="tile rv">
+          <svg viewBox="0 0 300 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="300" height="225" fill="#0f0820"/>
+            <path d="M150 40c40 0 70 30 70 70 0 50-50 80-70 80s-70-30-70-80c0-40 30-70 70-70z" fill="none" stroke="#ff2bd6" stroke-width="5" style="filter:drop-shadow(0 0 8px #ff2bd6)"/>
+            <path d="M120 105h60M135 135c8 12 22 12 30 0" stroke="#19f3ff" stroke-width="5" stroke-linecap="round" fill="none" style="filter:drop-shadow(0 0 6px #19f3ff)"/>
+          </svg><span>Moda & estilo</span>
+        </div>
+        <div class="tile rv">
+          <svg viewBox="0 0 300 225" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="300" height="225" fill="#0f0820"/>
+            <path d="M40 170c20-70 60-110 110-110s90 40 110 110z" fill="none" stroke="#b6ff3c" stroke-width="5" style="filter:drop-shadow(0 0 8px #b6ff3c)"/>
+            <path d="M80 170c10-40 35-65 70-65s60 25 70 65z" fill="none" stroke="#19f3ff" stroke-width="4"/>
+            <line x1="30" y1="170" x2="270" y2="170" stroke="#ff2bd6" stroke-width="4"/>
+          </svg><span>Gaming & ocio</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Proceso</span>
+        <h2>Del plano al <span class="glow-c">lanzamiento</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step rv"><b>FASE 01</b><h3>Briefing</h3><p>Entendemos tu marca, tu público y tus objetivos.</p></div>
+        <div class="step rv"><b>FASE 02</b><h3>Prototipo</h3><p>Te mostramos el diseño antes de construir nada.</p></div>
+        <div class="step rv"><b>FASE 03</b><h3>Desarrollo</h3><p>Programamos todo y lo probamos en celular y escritorio.</p></div>
+        <div class="step rv"><b>FASE 04</b><h3>Lanzamiento</h3><p>Publicamos y te acompañamos en los primeros pasos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planes" class="alt">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="tag">Planes</span>
+        <h2>Elegí tu <span class="glow-m">nivel</span></h2>
+        <p>Precios de ejemplo para esta demo.</p>
+      </div>
+      <div class="plans">
+        <div class="plan rv"><h3>Spark</h3><div class="price">$ —<small> / pago único</small></div>
+          <ul><li>Página de 1 sección</li><li>Botón de contacto</li><li>Diseño responsive</li></ul><a href="#contacto" class="btn">Elegir</a></div>
+        <div class="plan pop rv"><span class="badge">RECOMENDADO</span><h3>Pulse</h3><div class="price">$ —<small> / pago único</small></div>
+          <ul><li>Hasta 5 secciones</li><li>Galería y animaciones</li><li>Formulario de contacto</li><li>Redes y mapa</li></ul><a href="#contacto" class="btn m">Elegir</a></div>
+        <div class="plan rv"><h3>Nova</h3><div class="price">$ —<small> / pago único</small></div>
+          <ul><li>Todo lo de Pulse</li><li>Tienda o catálogo</li><li>Dominio propio</li><li>Soporte prioritario</li></ul><a href="#contacto" class="btn">Elegir</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="cta">
+    <div class="wrap grid">
+      <div class="rv">
+        <span class="tag">Contacto</span>
+        <h2>¿Encendemos tu <span class="glow-c">proyecto</span>?</h2>
+        <p style="margin-top:1rem;color:var(--muted);font-size:1.1rem">Escribinos y te respondemos rápido. Sin compromiso.</p>
+      </div>
+      <form id="form" class="rv">
+        <div><label for="n">Nombre</label><input id="n" name="nombre" required placeholder="Tu nombre"></div>
+        <div><label for="e">Email</label><input id="e" name="email" type="email" required placeholder="tu@correo.com"></div>
+        <div><label for="m">Mensaje</label><textarea id="m" name="mensaje" placeholder="Contanos qué necesitás…"></textarea></div>
+        <button class="btn m" type="submit">Enviar</button>
+        <p class="ok" id="ok">// Mensaje recibido. (Formulario de demostración: no se envía a ningún lado.)</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>NEÓN NORTE · PÁGINA DE DEMOSTRACIÓN · © 2026</footer>
+
+<script>
+  const btn=document.getElementById('menuBtn'),menu=document.getElementById('menu');
+  btn.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  document.getElementById('form').addEventListener('submit',ev=>{ev.preventDefault();document.getElementById('ok').style.display='block';ev.target.reset()});
+</script>
+</body>
+</html>
